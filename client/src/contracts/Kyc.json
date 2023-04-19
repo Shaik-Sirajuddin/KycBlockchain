@@ -2,59 +2,33 @@
   "contractName": "Kyc",
   "abi": [
     {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "reqid",
-          "type": "uint256"
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
         },
         {
-          "indexed": false,
           "internalType": "address",
-          "name": "custAddress",
+          "name": "_ethAddress",
           "type": "address"
-        },
+        }
+      ],
+      "name": "addOrg",
+      "outputs": [
         {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
           "internalType": "bool",
-          "name": "isAllowed",
+          "name": "",
           "type": "bool"
         }
       ],
-      "name": "accessGiven",
-      "type": "event"
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "custAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "accessRevoked",
-      "type": "event"
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
     },
     {
       "anonymous": false,
@@ -95,23 +69,70 @@
       "type": "event"
     },
     {
-      "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "address",
-          "name": "custAddress",
-          "type": "address"
+          "internalType": "uint256",
+          "name": "_reqcount",
+          "type": "uint256"
         },
         {
-          "indexed": false,
           "internalType": "address",
-          "name": "ethAddress",
+          "name": "_ethAddress",
           "type": "address"
         }
       ],
-      "name": "kycRemoved",
-      "type": "event"
+      "name": "deleteRequestCust",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_reqcount",
+          "type": "uint256"
+        }
+      ],
+      "name": "deleteRequestOrg",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_reqcount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_ethAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isAllowed",
+          "type": "bool"
+        }
+      ],
+      "name": "giveAccessKYC",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
       "anonymous": false,
@@ -146,207 +167,6 @@
       "type": "event"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "reqid",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "custAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "isAllowed",
-          "type": "bool"
-        }
-      ],
-      "name": "requestAdded",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "reqid",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "requestRemoved",
-      "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "admin",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "addOrg",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "removeOrg",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "viewOrg",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "ethAddress",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct Kyc.Organization",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getYourOrgDetail",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "ethAddress",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct Kyc.Organization",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "validOrg",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "validAdmin",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "validCust",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -355,22 +175,42 @@
         },
         {
           "internalType": "string",
-          "name": "_jsonHash",
+          "name": "name",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "_photohash",
+          "name": "fatherName",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "_citizenship_front_hash",
+          "name": "motherName",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "_citizenship_back_hash",
+          "name": "grandfatherName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "temporaryAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "permanenetAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "contactNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "dob",
           "type": "string"
         },
         {
@@ -408,42 +248,175 @@
           "type": "address"
         }
       ],
-      "name": "viewKYC",
+      "name": "removeKYC",
       "outputs": [
         {
           "internalType": "bool",
           "name": "",
           "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "removeOrg",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_custaddress",
+          "type": "address"
+        }
+      ],
+      "name": "requestKYC",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reqid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "requestRemoved",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "revokeAccessKYC",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_custaddress",
+          "type": "address"
         },
         {
           "internalType": "string",
-          "name": "",
+          "name": "name",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "",
+          "name": "fatherName",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "",
+          "name": "motherName",
           "type": "string"
         },
         {
           "internalType": "string",
-          "name": "",
+          "name": "grandfatherName",
           "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "temporaryAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "permanenetAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "contactNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "dob",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "_kycStatus",
+          "type": "bool"
         },
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "_d",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "_n",
           "type": "uint256"
+        }
+      ],
+      "name": "updateKYC",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -451,57 +424,186 @@
     },
     {
       "inputs": [],
-      "name": "viewYourKYC",
+      "name": "getYourOrgDetail",
       "outputs": [
         {
           "components": [
             {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
               "internalType": "address",
-              "name": "custAddress",
+              "name": "ethAddress",
               "type": "address"
-            },
-            {
-              "internalType": "string",
-              "name": "jsonHash",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "photoHash",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "citizenship_front_hash",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "citizenship_back_hash",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "d",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "n",
-              "type": "uint256"
-            },
-            {
-              "internalType": "address[]",
-              "name": "organization",
-              "type": "address[]"
-            },
-            {
-              "internalType": "bool",
-              "name": "kycStatus",
-              "type": "bool"
             }
           ],
-          "internalType": "struct Kyc.Customer",
+          "internalType": "struct Kyc.Organization",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "listRequest",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "req_count",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "Address",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Kyc.kycRequestList[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "validAdmin",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "validCust",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "validOrg",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_custaddress",
+          "type": "address"
+        }
+      ],
+      "name": "viewKYC",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "fatherName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "motherName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "grandfatherName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "temporaryAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "permanenetAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "contactNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "dob",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "_kycStatus",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_d",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_n",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "viewOrg",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "ethAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Kyc.Organization",
           "name": "",
           "type": "tuple"
         }
@@ -548,205 +650,83 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_custaddress",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "_jsonHash",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_photohash",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_citizenship_front_hash",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_citizenship_back_hash",
-          "type": "string"
-        },
-        {
-          "internalType": "bool",
-          "name": "_kycStatus",
-          "type": "bool"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_d",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_n",
-          "type": "uint256"
-        }
-      ],
-      "name": "updateKYC",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_custaddress",
-          "type": "address"
-        }
-      ],
-      "name": "requestKYC",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_reqcount",
-          "type": "uint256"
-        }
-      ],
-      "name": "deleteRequestOrg",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_reqcount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "deleteRequestCust",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [],
-      "name": "listRequest",
+      "name": "viewYourKYC",
       "outputs": [
         {
           "components": [
             {
+              "internalType": "address",
+              "name": "custAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "fatherName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "motherName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "grandfatherName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "temporaryAddress",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "permanenetAddress",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contactNumber",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "dob",
+              "type": "string"
+            },
+            {
               "internalType": "uint256",
-              "name": "req_count",
+              "name": "d",
               "type": "uint256"
             },
             {
-              "internalType": "address",
-              "name": "Address",
-              "type": "address"
+              "internalType": "uint256",
+              "name": "n",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address[]",
+              "name": "organization",
+              "type": "address[]"
+            },
+            {
+              "internalType": "bool",
+              "name": "kycStatus",
+              "type": "bool"
             }
           ],
-          "internalType": "struct Kyc.kycRequestList[]",
+          "internalType": "struct Kyc.Customer",
           "name": "",
-          "type": "tuple[]"
+          "type": "tuple"
         }
       ],
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_reqcount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "bool",
-          "name": "_isAllowed",
-          "type": "bool"
-        }
-      ],
-      "name": "giveAccessKYC",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "revokeAccessKYC",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_custaddress",
-          "type": "address"
-        }
-      ],
-      "name": "removeKYC",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
@@ -59641,7 +59621,7 @@
     "11155111": {
       "events": {},
       "links": {},
-      "address": "0x16d3D8CAf5Af16951A35935D6536A5594c37E45C",
+      "address": "0x955d7f0b34B29D423e02903e5a215E91cA6b5850",
       "transactionHash": "0x09a814a91e21c77971a31f2aefd396e3286820a763aa03830a66544438891426"
     }
   },

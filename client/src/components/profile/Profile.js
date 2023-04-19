@@ -20,45 +20,10 @@ class Profile extends Component {
   };
 
   componentDidMount = () => {
+    console.log(this.props)
     let d = Number(this.props.detail[5]);
     let n = Number(this.props.detail[6]);
     console.log(d, n);
-    axios.get(`https://${this.props.detail[1]}.ipfs.infura-ipfs.io/`).then(
-      (res) => {
-        let de = decrypt(res.data, d, n);
-        this.setState({ data: JSON.parse(de) });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    axios.get(`https://${this.props.detail[2]}.ipfs.infura-ipfs.io/`).then(
-      (res) => {
-        let de = decrypt(res.data, d, n);
-        this.setState({ p_photo: de });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    axios.get(`https://${this.props.detail[3]}.ipfs.infura-ipfs.io/`).then(
-      (res) => {
-        let de = decrypt(res.data, d, n);
-        this.setState({ front: de });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    axios.get(`https://${this.props.detail[4]}.ipfs.infura-ipfs.io/`).then(
-      (res) => {
-        let de = decrypt(res.data, d, n);
-        this.setState({ back: de });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   };
 
   constructor(props) {
@@ -86,55 +51,55 @@ class Profile extends Component {
             <tbody>
               <tr>
                 <td>Name</td>
-                <td>: {this.state.data.name}</td>
+                <td>: {this.props.detail.name}</td>
               </tr>
               <tr>
                 <td>Father's Name</td>
-                <td>: {this.state.data.fathername}</td>
+                <td>: {this.props.detail.fatherName}</td>
               </tr>
               <tr>
                 <td>Mother's Name</td>
-                <td>: {this.state.data.mothername}</td>
+                <td>: {this.props.detail.motherName}</td>
               </tr>
               <tr>
                 <td>Grandfather's Name</td>
-                <td>: {this.state.data.grandfathername}</td>
+                <td>: {this.props.detail.grandfatherName}</td>
               </tr>
               <tr>
                 <td>Temporary Adress</td>
-                <td>: {this.state.data.taddress}</td>
+                <td>: {this.props.detail.temporaryAddress}</td>
               </tr>
               <tr>
                 <td>Permanent address</td>
-                <td>: {this.state.data.paddress}</td>
+                <td>: {this.props.detail.permanenetAddress}</td>
               </tr>
               <tr>
                 <td>Contact number</td>
-                <td>: {this.state.data.phone}</td>
+                <td>: {this.props.detail.contactNumber}</td>
               </tr>
               <tr>
                 <td>DOB</td>
-                <td>: {this.state.data.dob}</td>
+                <td>: {this.props.detail.dob}</td>
               </tr>
               <tr>
                 <td>Govt. issued docs</td>
-                <td>
+                {/* <td>
                   <img
                     className={classes.govt}
                     src={this.state.front}
                     alt="front"
                   />{" "}
-                </td>
+                </td> */}
               </tr>
               <tr>
                 <td></td>
-                <td>
+                {/* <td>
                   <img
                     className={classes.govt}
                     src={this.state.back}
                     alt="back"
                   />{" "}
-                </td>
+                </td> */}
               </tr>
             </tbody>
           </table>

@@ -83,125 +83,70 @@ class Org extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
-    let s = await encrypt(
-      JSON.stringify(this.state.data),
-      this.state.key[0],
-      this.state.key[2]
-    );
-    await ipfs.add(s).then(
-      (result) => {
-        this.setState({ jsonHash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.p_photo).then(
-      (result) => {
-        this.setState({ photo_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.citizenship_front).then(
-      (result) => {
-        this.setState({ citizenship_front_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.citizenship_back).then(
-      (result) => {
-        this.setState({ citizenship_back_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.state.kyc1
-      .registerKYC(
-        this.state.eth_address,
-        this.state.jsonHash,
-        this.state.photo_hash,
-        this.state.citizenship_front_hash,
-        this.state.citizenship_back_hash,
-        true,
-        this.state.key[1],
-        this.state.key[2],
-        { from: this.state.account }
-      )
-      .then((res) => {
-        this.setState({ loading: false });
-        this.setState({ added: res });
-      })
-      .catch((err) => {
-        this.setState({ loading: false });
-        if (
-          err.message ===
-          "MetaMask Tx Signature: User denied transaction signature."
-        ) {
-          this.setState({
-            error: true,
-            errormsg: err.message,
-          });
-        } else {
-          this.setState({
-            error: true,
-            errormsg: err.data.message,
-          });
-        }
-      });
+
+    console.log("here")
+    try {
+      this.state.kyc1
+        .registerKYC(
+          this.state.eth_address,
+          this.state.name,
+          this.state.fatherName,
+          this.state.motherName,
+          this.state.grandfatherName,
+          this.state.temporaryAddress,
+          this.state.permanenetAddress,
+          this.state.contactNumber,
+          this.state.dob,
+          true,
+          this.state.key[1],
+          this.state.key[2],
+          { from: this.state.account }
+        )
+        .then((res) => {
+          console.log(res)
+          this.setState({ loading: false });
+          this.setState({ added: res });
+        })
+        .catch((err) => {
+          console.log(err)
+
+          this.setState({ loading: false });
+          if (
+            err.message ===
+            "MetaMask Tx Signature: User denied transaction signature."
+          ) {
+            this.setState({
+              error: true,
+              errormsg: err.message,
+            });
+          } else {
+            this.setState({
+              error: true,
+              errormsg: err && err.data ? err.data.message : '',
+            });
+          }
+        });
+    }
+    catch (error) {
+      console.log("error here : ", error)
+    }
   };
 
   updateKyc = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
-    let s = await encrypt(
-      JSON.stringify(this.state.data),
-      this.state.key[0],
-      this.state.key[2]
-    );
-    await ipfs.add(s).then(
-      (result) => {
-        this.setState({ jsonHash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.p_photo).then(
-      (result) => {
-        this.setState({ photo_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.citizenship_front).then(
-      (result) => {
-        this.setState({ citizenship_front_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    await ipfs.add(this.state.citizenship_back).then(
-      (result) => {
-        this.setState({ citizenship_back_hash: result.cid.toV1().toString() });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    console.log(this.state)
     this.state.kyc1
       .updateKYC(
         this.state.eth_address,
-        this.state.jsonHash,
-        this.state.photo_hash,
-        this.state.citizenship_front_hash,
-        this.state.citizenship_back_hash,
+        this.state.name,
+        this.state.fatherName,
+        this.state.motherName,
+        this.state.grandfatherName,
+        this.state.temporaryAddress,
+        this.state.permanenetAddress,
+        this.state.contactNumber,
+        this.state.dob,
         true,
         this.state.key[1],
         this.state.key[2],
@@ -224,7 +169,7 @@ class Org extends Component {
         } else {
           this.setState({
             error: true,
-            errormsg: err.data.message,
+            errormsg: err.message,
           });
         }
       });
@@ -235,10 +180,8 @@ class Org extends Component {
     const name = target.name;
     const value = target.value;
     this.setState({
-      data: {
-        ...this.state.data,
-        [name]: value,
-      },
+      ...this.state,
+      [name]: value,
     });
   };
   handleChange = (event) => {
@@ -282,9 +225,10 @@ class Org extends Component {
             errormsg: err.message,
           });
         } else {
+          console.log(err.message)
           this.setState({
             error: true,
-            errormsg: err.data.message,
+            errormsg: err.message,
           });
         }
       });
@@ -340,14 +284,14 @@ class Org extends Component {
       validOrg: false,
       loading: false,
       loadingorg: true,
-      data: {},
-      jsonHash: "",
-      photo_hash: "",
-      citizenship_front_hash: "",
-      citizenship_back_hash: "",
-      p_photo: "",
-      citizenship_front: "",
-      citizenship_back: "",
+      name: "",
+      fatherName: "",
+      motherName: "",
+      grandfatherName: "",
+      temporaryAddress: "",
+      permanenetAddress: "",
+      contactNumber: "",
+      dob: '',
       eth_address: "",
       added: "",
       req: "",
