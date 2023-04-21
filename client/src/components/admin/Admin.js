@@ -26,6 +26,7 @@ export default class Admin extends Component {
     );
   }
 
+
   async loadBlockchainData() {
     //Declare Web3
     const ethereum = window.ethereum;
@@ -45,6 +46,8 @@ export default class Admin extends Component {
       await kyc.validAdmin({ from: this.state.account }).then((res) => {
         this.setState({ validAdmin: res });
       });
+      let count = await kyc.organizationsCount();
+      this.setState({ organizationsCount: count })
       this.setState({ loadingadmin: false });
     } else {
       window.alert("KYC contract not deployed on this network");
@@ -179,6 +182,7 @@ export default class Admin extends Component {
       loadingadmin: "true",
       error: false,
       errormsg: "",
+      organizationsCount: 0,
     };
   }
 
@@ -218,6 +222,7 @@ export default class Admin extends Component {
                 orgDetail={this.state.orgDetail}
                 address={this.state.address}
                 viewOrg={this.viewOrg}
+                organizationsCount={this.state.organizationsCount}
                 handleChange={this.handleChange}
               />
             </Route>

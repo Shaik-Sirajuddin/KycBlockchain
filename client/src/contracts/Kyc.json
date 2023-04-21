@@ -2,30 +2,6 @@
   "contractName": "Kyc",
   "abi": [
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_name",
-          "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "_ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "addOrg",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -69,6 +45,94 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "orgAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "orgRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reqid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "requestRemoved",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_ethAddress",
+          "type": "address"
+        }
+      ],
+      "name": "addOrg",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -106,6 +170,31 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "getYourOrgDetail",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "ethAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Kyc.Organization",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -135,36 +224,42 @@
       "type": "function"
     },
     {
-      "anonymous": false,
-      "inputs": [
+      "inputs": [],
+      "name": "listRequest",
+      "outputs": [
         {
-          "indexed": false,
-          "internalType": "string",
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "req_count",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "Address",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Kyc.kycRequestList[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
-      "name": "orgAdded",
-      "type": "event"
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      "anonymous": false,
-      "inputs": [
+      "inputs": [],
+      "name": "organizationsCount",
+      "outputs": [
         {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
         }
       ],
-      "name": "orgRemoved",
-      "type": "event"
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "inputs": [
@@ -298,25 +393,6 @@
       "type": "function"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "reqid",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "ethAddress",
-          "type": "address"
-        }
-      ],
-      "name": "requestRemoved",
-      "type": "event"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -407,69 +483,6 @@
         }
       ],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "admin",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getYourOrgDetail",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "ethAddress",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct Kyc.Organization",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "listRequest",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "req_count",
-              "type": "uint256"
-            },
-            {
-              "internalType": "address",
-              "name": "Address",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct Kyc.kycRequestList[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -616,9 +629,21 @@
       "name": "viewOrgWithAccess",
       "outputs": [
         {
-          "internalType": "address[]",
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "ethAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Kyc.Organization[]",
           "name": "",
-          "type": "address[]"
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
@@ -711,9 +736,21 @@
               "type": "uint256"
             },
             {
-              "internalType": "address[]",
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "ethAddress",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct Kyc.Organization[]",
               "name": "organization",
-              "type": "address[]"
+              "type": "tuple[]"
             },
             {
               "internalType": "bool",
@@ -59621,7 +59658,7 @@
     "11155111": {
       "events": {},
       "links": {},
-      "address": "0x955d7f0b34B29D423e02903e5a215E91cA6b5850",
+      "address": "0xd6De71264736157B77bf59213FF8Ed5FeFB62CAa",
       "transactionHash": "0x09a814a91e21c77971a31f2aefd396e3286820a763aa03830a66544438891426"
     }
   },

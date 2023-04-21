@@ -29,7 +29,7 @@ export default function Addkyc(props) {
                     <Form.Control type="text" name="motherName" onChange={props.handleJsonChange}></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Grandfather's Name : </Form.Label>
+                    <Form.Label>Pan Card Number : </Form.Label>
                     <Form.Control type="text" name="grandfatherName" onChange={props.handleJsonChange}></Form.Control>
                 </Form.Group>
                 <Form.Group>

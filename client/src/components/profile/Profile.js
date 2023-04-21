@@ -62,11 +62,11 @@ class Profile extends Component {
                 <td>: {this.props.detail.motherName}</td>
               </tr>
               <tr>
-                <td>Grandfather's Name</td>
+                <td>Pan Card Number</td>
                 <td>: {this.props.detail.grandfatherName}</td>
               </tr>
               <tr>
-                <td>Temporary Adress</td>
+                <td>Aadhar Card Number</td>
                 <td>: {this.props.detail.temporaryAddress}</td>
               </tr>
               <tr>
@@ -81,16 +81,7 @@ class Profile extends Component {
                 <td>DOB</td>
                 <td>: {this.props.detail.dob}</td>
               </tr>
-              <tr>
-                <td>Govt. issued docs</td>
-                {/* <td>
-                  <img
-                    className={classes.govt}
-                    src={this.state.front}
-                    alt="front"
-                  />{" "}
-                </td> */}
-              </tr>
+
               <tr>
                 <td></td>
                 {/* <td>

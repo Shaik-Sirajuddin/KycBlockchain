@@ -1,20 +1,20 @@
-import React,{Component} from "react"
+import React, { Component } from "react"
 import { Container } from "react-bootstrap"
-import { Table,Button } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 
-export default class Vieworg extends Component{
-    
-    componentDidMount = () =>{
+export default class Vieworg extends Component {
+
+    componentDidMount = () => {
         document.title = "View Organization"
-        this.props.kyc.viewOrgWithAccess({from:this.props.account}).then(res=>{
-            this.setState({orgWithAccess:res})
+        this.props.kyc.viewOrgWithAccess({ from: this.props.account }).then(res => {
+            this.setState({ orgWithAccess: res })
         })
 
     }
 
     componentDidUpdate = () => {
-        this.props.kyc.viewOrgWithAccess({from:this.props.account}).then(res=>{
-            this.setState({orgWithAccess:res})
+        this.props.kyc.viewOrgWithAccess({ from: this.props.account }).then(res => {
+            this.setState({ orgWithAccess: res })
         })
     }
 
@@ -23,37 +23,40 @@ export default class Vieworg extends Component{
     //         this.setState({orgWithAccess:res})
     //     })
     // }
-    
-    constructor(props){
+
+    constructor(props) {
         super(props);
-        this.state={
-            orgWithAccess:[]
+        this.state = {
+            orgWithAccess: []
         }
-      }
-    render(){
-        return(
+    }
+    render() {
+        return (
             <Container>
-            <br/>
+                <br />
                 <Table striped hover responsive="sm">
                     <thead>
                         <tr>
                             <th>Index</th>
+                            <th>Organization Name</th>
                             <th>Organization Address</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.orgWithAccess.map((org,index)=>(
+                        {this.state.orgWithAccess.map((org, index) => (
                             <tr key={index}>
                                 <td>{index}</td>
-                                <td>{org}</td>
-                                <td style={{width:"20%"}}>
-                                    <Button variant="danger" onClick={()=>{
-                                        this.props.kyc1.revokeAccessKYC(org,{from:this.props.account})
-                                            .then(res=>{
+                                <td>{org.name}</td>
+
+                                <td>{org.ethAddress}</td>
+                                <td style={{ width: "20%" }}>
+                                    <Button variant="danger" onClick={() => {
+                                        this.props.kyc1.revokeAccessKYC(org, { from: this.props.account })
+                                            .then(res => {
                                                 console.log("deleted")
                                             })
-                                            .catch(e=>{
+                                            .catch(e => {
                                                 console.log(e)
                                             })
                                     }}>Revoke Access</Button>
@@ -65,5 +68,5 @@ export default class Vieworg extends Component{
             </Container>
         )
     }
-    
+
 }
