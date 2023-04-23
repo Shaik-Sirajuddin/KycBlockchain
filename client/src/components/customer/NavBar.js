@@ -7,7 +7,8 @@ import { Button } from 'react-bootstrap'
 
 export default class NavBar extends Component {
     openHome() {
-        window.location.href = "http://localhost:3000";
+        window.location.href = "https://singular-brioche-c5506a.netlify.app/";
+
     }
     render() {
         return (
@@ -18,7 +19,7 @@ export default class NavBar extends Component {
                             'backgroundColor': 'white'
                         }}
                         onClick={this.openHome}
-                        className="navbar-brand" to="/admin"  >KYC Blockchain | Organization</Button>
+                        className="navbar-brand" to="/admin"  >KYC Blockchain | Customer</Button>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
