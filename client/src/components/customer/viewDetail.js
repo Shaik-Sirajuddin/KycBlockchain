@@ -1,14 +1,13 @@
-import React,{useEffect} from "react"
+import React, { useEffect } from "react"
 import Profile from "../profile"
 
-export default function Viewdetail(props){
+export default function Viewdetail(props) {
     useEffect(() => {
-        document.title='Your Details'
+        document.title = 'Your Details'
     })
-    return(
+    return (
         <>
-        {props.error? <p>{props.errormsg}</p>:props.custDetail&&<Profile detail={props.custDetail}/>}
-            
+            {props.error ? <p>{props.errormsg}</p> : props.custDetail && <Profile detail={props.custDetail} />}
         </>
     )
 }

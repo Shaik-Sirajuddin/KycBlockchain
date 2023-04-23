@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import classes from "./Profile.module.css";
-import axios from "axios";
-import { decrypt } from "../../rsa/Rsa";
 
 class Profile extends Component {
   verifiedIcon = () => {
@@ -40,7 +38,7 @@ class Profile extends Component {
       <div className={classes.bground}>
         <h1>Profile</h1>
         <div className={classes.header}>
-          <img src={this.state.p_photo} className={classes.pic} alt="prop" />
+          {/* <img src={this.state.p_photo} className={classes.pic} alt="prop" /> */}
           <p className="text-end pe-2 text-success fs-5 fw-bold mt-2">
             <this.verifiedIcon />
             Verified
