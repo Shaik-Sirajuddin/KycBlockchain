@@ -261,22 +261,42 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_jsonHash",
+						"name": "name",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_photohash",
+						"name": "fatherName",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_citizenship_front_hash",
+						"name": "motherName",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_citizenship_back_hash",
+						"name": "grandfatherName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "temporaryAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "permanenetAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "contactNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dob",
 						"type": "string"
 					},
 					{
@@ -391,22 +411,42 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_jsonHash",
+						"name": "name",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_photohash",
+						"name": "fatherName",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_citizenship_front_hash",
+						"name": "motherName",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_citizenship_back_hash",
+						"name": "grandfatherName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "temporaryAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "permanenetAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "contactNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dob",
 						"type": "string"
 					},
 					{
@@ -486,38 +526,58 @@
 				"name": "viewKYC",
 				"outputs": [
 					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "fatherName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "motherName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "grandfatherName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "temporaryAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "permanenetAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "contactNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dob",
+						"type": "string"
+					},
+					{
 						"internalType": "bool",
-						"name": "",
+						"name": "_kycStatus",
 						"type": "bool"
 					},
 					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "_d",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "_n",
 						"type": "uint256"
 					}
 				],
@@ -606,22 +666,42 @@
 							},
 							{
 								"internalType": "string",
-								"name": "jsonHash",
+								"name": "name",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "photoHash",
+								"name": "fatherName",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "citizenship_front_hash",
+								"name": "motherName",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "citizenship_back_hash",
+								"name": "grandfatherName",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "temporaryAddress",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "permanenetAddress",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "contactNumber",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dob",
 								"type": "string"
 							},
 							{
@@ -675,18 +755,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"Kyc.sol": {
-			"keccak256": "0xb4017664dabf9ae886e4fb997e2752944b8762cc17d86571a122d348afd473e1",
+			"keccak256": "0xe332ef91bfb9ed086fa92be9c8e0aad4cfdea793e9ce7da140d214f2902111fe",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://57da04a11ddd5a4b74429972c90dea1185b758a26d7fe4d2ee9ab8ce1fa3d55b",
-				"dweb:/ipfs/QmSBgVVSvCYZXrBaSCZ7rGBx76zkvzBdgGNRDZ2prc4KdT"
+				"bzz-raw://ae68a3402ba9c56a45302c42aaed14462efe08ccab7547db67262581547f5c0a",
+				"dweb:/ipfs/QmZ9wmBChsr5w6qESq3i3waWViH7UnVsGZGMq1vpE6yTJQ"
 			]
 		}
 	},

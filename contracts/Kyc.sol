@@ -5,13 +5,17 @@ contract Kyc {
     address public admin;
     struct Customer {
         address custAddress;
-        string jsonHash;
-        string photoHash;
-        string citizenship_front_hash;
-        string citizenship_back_hash;
+        string name;
+        string fatherName;
+        string motherName;
+        string grandfatherName;
+        string temporaryAddress;
+        string permanenetAddress;
+        string contactNumber;
+        string dob;
         uint256 d;
         uint256 n;
-        address[] organization;
+        Organization[] organization;
         bool kycStatus;
     }
 
@@ -45,25 +49,14 @@ contract Kyc {
     mapping(address => kycRequest) kycrequestsbyorg;
     mapping(address => kycRequestCust) kycrequestsbycust;
 
+    int public organizationsCount = 0;
+
     event orgAdded(string name, address ethAddress);
     event orgRemoved(address ethAddress);
     event customerAdded(address custAddress, bool kycStatus);
     event customerUpdated(address custAddress, bool kycStatus);
-    // event requestAdded(
-    //     uint256 reqid,
-    //     address ethAddress,
-    //     address custAddress,
-    //     bool isAllowed
-    // );
+
     event requestRemoved(uint256 reqid, address ethAddress);
-    // event accessGiven(
-    //     uint256 reqid,
-    //     address custAddress,
-    //     address ethAddress,
-    //     bool isAllowed
-    // );
-    //event accessRevoked(address custAddress, address ethAddress);
-    // event kycRemoved(address custAddress, address ethAddress);
 
     // Checks whether the requestor is admin
     modifier isAdmin() {
@@ -81,14 +74,15 @@ contract Kyc {
     }
 
     //Check if Org has access to the user KYC
-    function findOrg(address _custaddress, address ethAddress)
-        internal
-        view
-        returns (bool)
-    {
+    function findOrg(
+        address _custaddress,
+        address ethAddress
+    ) internal view returns (bool) {
         uint256 i = 0;
         for (i; i < customers[_custaddress].organization.length; i++) {
-            if (customers[_custaddress].organization[i] == ethAddress) {
+            if (
+                customers[_custaddress].organization[i].ethAddress == ethAddress
+            ) {
                 return true;
             }
         }
@@ -96,24 +90,24 @@ contract Kyc {
     }
 
     //Find the index of Org in KYC.organization array
-    function findOrgIndex(address _custaddress, address ethAddress)
-        internal
-        view
-        returns (uint256 index)
-    {
+    function findOrgIndex(
+        address _custaddress,
+        address ethAddress
+    ) internal view returns (uint256 index) {
         uint256 i = 0;
         for (i; i < customers[_custaddress].organization.length; i++) {
-            if (customers[_custaddress].organization[i] == ethAddress) {
+            if (
+                customers[_custaddress].organization[i].ethAddress == ethAddress
+            ) {
                 return i;
             }
         }
     }
 
-    function findRequestIndex(address _custaddress, address _ethAddress)
-        internal
-        view
-        returns (uint256 index)
-    {
+    function findRequestIndex(
+        address _custaddress,
+        address _ethAddress
+    ) internal view returns (uint256 index) {
         uint256 i = 0;
         for (
             i;
@@ -144,11 +138,10 @@ contract Kyc {
     }
 
     //Add organization ONLY BY ADMIN
-    function addOrg(string memory _name, address _ethAddress)
-        public
-        isAdmin
-        returns (bool)
-    {
+    function addOrg(
+        string memory _name,
+        address _ethAddress
+    ) public isAdmin returns (bool) {
         require(
             organizations[_ethAddress].ethAddress != _ethAddress,
             "Org already added"
@@ -156,6 +149,7 @@ contract Kyc {
         organizations[_ethAddress] = Organization(_name, _ethAddress);
         kycrequestsbyorg[_ethAddress].ethAddress = _ethAddress;
         kycrequestsbyorg[_ethAddress].req_count = 0;
+        organizationsCount += 1;
         emit orgAdded(_name, _ethAddress);
         return true;
     }
@@ -167,17 +161,15 @@ contract Kyc {
             "Org doesnt exist"
         );
         delete organizations[_ethAddress];
+        organizationsCount -= 1;
         emit orgRemoved(_ethAddress);
         return true;
     }
 
     //Return Organization Info if it exists
-    function viewOrg(address _ethAddress)
-        public
-        view
-        isAdmin
-        returns (Organization memory)
-    {
+    function viewOrg(
+        address _ethAddress
+    ) public view isAdmin returns (Organization memory) {
         require(
             organizations[_ethAddress].ethAddress == _ethAddress,
             "Org doesnt exist"
@@ -220,37 +212,45 @@ contract Kyc {
 
     function writeKYC(
         address _custaddress,
-        string memory _jsonHash,
-        string memory _photohash,
-        string memory _citizenship_front_hash,
-        string memory _citizenship_back_hash,
+        string memory name,
+        string memory fatherName,
+        string memory motherName,
+        string memory grandfatherName,
+        string memory temporaryAddress,
+        string memory permanenetAddress,
+        string memory contactNumber,
+        string memory dob,
         bool _kycStatus,
         uint256 _d,
         uint256 _n
     ) internal {
-        require(bytes(_jsonHash).length > 0);
-        require(bytes(_photohash).length > 0);
-        require(bytes(_citizenship_back_hash).length > 0);
-        require(bytes(_citizenship_front_hash).length > 0);
         customers[_custaddress].custAddress = _custaddress;
-        customers[_custaddress].jsonHash = _jsonHash;
-        customers[_custaddress].photoHash = _photohash;
-        customers[_custaddress]
-            .citizenship_front_hash = _citizenship_front_hash;
-        customers[_custaddress].citizenship_back_hash = _citizenship_back_hash;
+        customers[_custaddress].name = name;
+        customers[_custaddress].fatherName = fatherName;
+        customers[_custaddress].motherName = motherName;
+        customers[_custaddress].grandfatherName = grandfatherName;
+        customers[_custaddress].temporaryAddress = temporaryAddress;
+        customers[_custaddress].permanenetAddress = permanenetAddress;
+        customers[_custaddress].contactNumber = contactNumber;
+        customers[_custaddress].dob = dob;
         customers[_custaddress].kycStatus = _kycStatus;
         customers[_custaddress].d = _d;
         customers[_custaddress].n = _n;
+
         kycrequestsbycust[_custaddress].custAddress = _custaddress;
     }
 
     //Register User KYC by registered Orgs
     function registerKYC(
         address _custaddress,
-        string memory _jsonHash,
-        string memory _photohash,
-        string memory _citizenship_front_hash,
-        string memory _citizenship_back_hash,
+        string memory name,
+        string memory fatherName,
+        string memory motherName,
+        string memory grandfatherName,
+        string memory temporaryAddress,
+        string memory permanenetAddress,
+        string memory contactNumber,
+        string memory dob,
         bool _kycStatus,
         uint256 _d,
         uint256 _n
@@ -261,10 +261,14 @@ contract Kyc {
         );
         writeKYC(
             _custaddress,
-            _jsonHash,
-            _photohash,
-            _citizenship_front_hash,
-            _citizenship_back_hash,
+            name,
+            fatherName,
+            motherName,
+            grandfatherName,
+            temporaryAddress,
+            permanenetAddress,
+            contactNumber,
+            dob,
             _kycStatus,
             _d,
             _n
@@ -275,31 +279,54 @@ contract Kyc {
     }
 
     //View User KYC by Authorized Orgs
-    function viewKYC(address _custaddress)
+    function viewKYC(
+        address _custaddress
+    )
         public
         view
         returns (
-            bool,
-            string memory,
-            string memory,
-            string memory,
-            string memory,
-            uint256,
-            uint256
+            string memory name,
+            string memory fatherName,
+            string memory motherName,
+            string memory grandfatherName,
+            string memory temporaryAddress,
+            string memory permanenetAddress,
+            string memory contactNumber,
+            string memory dob,
+            bool _kycStatus,
+            uint256 _d,
+            uint256 _n
         )
     {
         require(
             findOrg(_custaddress, msg.sender),
             "User hasnt given their consent"
         );
+        Customer memory cus = customers[_custaddress];
+        // return (
+        //     customers[_custaddress].name,customers[_custaddress].fatherName,
+        //     customers[_custaddress].motherName,
+        //     customers[_custaddress].grandfatherName,
+        //     customers[_custaddress].temporaryAddress,
+        //     customers[_custaddress].permanenetAddress,
+        //     customers[_custaddress].contactNumber,
+        //     customers[_custaddress].dob,
+        //     customers[_custaddress].kycStatus,
+        //     customers[_custaddress].d,
+        //     customers[_custaddress].n,
+        // );
         return (
-            customers[_custaddress].kycStatus,
-            customers[_custaddress].jsonHash,
-            customers[_custaddress].photoHash,
-            customers[_custaddress].citizenship_front_hash,
-            customers[_custaddress].citizenship_back_hash,
-            customers[_custaddress].d,
-            customers[_custaddress].n
+            cus.name,
+            cus.fatherName,
+            cus.motherName,
+            cus.grandfatherName,
+            cus.temporaryAddress,
+            cus.permanenetAddress,
+            cus.contactNumber,
+            cus.dob,
+            cus.kycStatus,
+            cus.d,
+            cus.n
         );
     }
 
@@ -308,7 +335,7 @@ contract Kyc {
         return customers[msg.sender];
     }
 
-    function viewOrgWithAccess() public view returns (address[] memory) {
+    function viewOrgWithAccess() public view returns (Organization[] memory) {
         require(
             customers[msg.sender].custAddress == msg.sender,
             "You dont have authority"
@@ -336,10 +363,14 @@ contract Kyc {
     //Update User KYC by registered and authorized orgs
     function updateKYC(
         address _custaddress,
-        string memory _jsonHash,
-        string memory _photohash,
-        string memory _citizenship_front_hash,
-        string memory _citizenship_back_hash,
+        string memory name,
+        string memory fatherName,
+        string memory motherName,
+        string memory grandfatherName,
+        string memory temporaryAddress,
+        string memory permanenetAddress,
+        string memory contactNumber,
+        string memory dob,
         bool _kycStatus,
         uint256 _d,
         uint256 _n
@@ -354,10 +385,14 @@ contract Kyc {
         );
         writeKYC(
             _custaddress,
-            _jsonHash,
-            _photohash,
-            _citizenship_front_hash,
-            _citizenship_back_hash,
+            name,
+            fatherName,
+            motherName,
+            grandfatherName,
+            temporaryAddress,
+            permanenetAddress,
+            contactNumber,
+            dob,
             _kycStatus,
             _d,
             _n
@@ -384,12 +419,7 @@ contract Kyc {
             kycRequestList(kycrequestsbyorg[msg.sender].req_count, msg.sender)
         );
         kycrequestsbyorg[msg.sender].req_count++;
-        // emit requestAdded(
-        //     kycrequestsbyorg[msg.sender].req_count - 1,
-        //     msg.sender,
-        //     _custaddress,
-        //     false
-        // );
+
         return true;
     }
 
@@ -433,11 +463,9 @@ contract Kyc {
     }
 
     //Delete User KYC request by organization
-    function deleteRequestOrg(uint256 _reqcount)
-        public
-        isOrgValid
-        returns (bool)
-    {
+    function deleteRequestOrg(
+        uint256 _reqcount
+    ) public isOrgValid returns (bool) {
         require(
             kycrequestsbyorg[msg.sender].ethAddress == msg.sender,
             "You dont have authority to delete"
@@ -513,10 +541,12 @@ contract Kyc {
         );
         if (_isAllowed == true) {
             if (findOrg(msg.sender, _ethAddress) == false) {
-                customers[msg.sender].organization.push(_ethAddress);
+                customers[msg.sender].organization.push(
+                    organizations[_ethAddress]
+                );
             }
             deleteRequestCust(_reqcount, _ethAddress);
-           // emit accessGiven(_reqcount, msg.sender, _ethAddress, _isAllowed);
+            // emit accessGiven(_reqcount, msg.sender, _ethAddress, _isAllowed);
         } else {
             deleteRequestCust(_reqcount, _ethAddress);
         }

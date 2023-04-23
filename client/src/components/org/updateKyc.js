@@ -44,10 +44,7 @@ export default function Updatekyc(props) {
                     <Form.Label>DOB : </Form.Label>
                     <Form.Control type="date" name="dob" onChange={props.handleJsonChange}></Form.Control>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Citizenship number : </Form.Label>
-                    <Form.Control type="text" name="citizenship_no" onChange={props.handleJsonChange}></Form.Control>
-                </Form.Group>
+
                 <Form.Group>
                     <Form.Label>Phone Number : </Form.Label>
                     <Form.Control type="number" name="contactNumber" onChange={props.handleJsonChange}></Form.Control>
