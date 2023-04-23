@@ -9,7 +9,7 @@ export default class NavBar extends Component {
         return (
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Link className="navbar-brand" to="/">KYC Blockchain</Link>
+                    <Link className="navbar-brand" to="/organization">KYC Blockchain</Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">

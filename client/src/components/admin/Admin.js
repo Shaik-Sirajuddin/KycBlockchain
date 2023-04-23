@@ -9,22 +9,23 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import { NotFound } from "../404";
 import { ethers } from "ethers";
-
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner(0);
 export default class Admin extends Component {
+
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
     document.title = this.props.title;
   }
-
   async componentWillUnmount() {
     await window.ethereum.removeListener(
       "accountsChanged",
       this.handleAccountsChanged
     );
   }
+
+
 
 
   async loadBlockchainData() {
@@ -200,7 +201,8 @@ export default class Admin extends Component {
         <>
           <NavBar account={this.state.account} />
           <Switch>
-            <Route exact path="/admin/"></Route>
+            <Route exact path="/admin/">
+            </Route>
             <Route exact path="/admin/add">
               <Addorg
                 cleanState={this.cleanState}
@@ -238,6 +240,7 @@ export default class Admin extends Component {
                 handleChange={this.handleChange}
               />
             </Route>
+
             <Route path="*">
               <NotFound />
             </Route>

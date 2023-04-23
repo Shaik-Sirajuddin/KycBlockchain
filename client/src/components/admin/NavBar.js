@@ -5,11 +5,15 @@ import Nav from 'react-bootstrap/Nav'
 import { Link } from 'react-router-dom'
 
 export default class NavBar extends Component {
+
+    openHome() {
+        //   window.location.href = "http://localhost:3000";
+    }
     render() {
         return (
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Link className="navbar-brand" to="/">KYC Blockchain | Admin</Link>
+                    <Link className="navbar-brand" to="/admin"  >KYC Blockchain | Admin</Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
@@ -22,7 +26,7 @@ export default class NavBar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>
+            </Navbar >
         )
     }
 }
